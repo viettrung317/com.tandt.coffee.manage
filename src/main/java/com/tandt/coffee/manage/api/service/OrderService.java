@@ -48,7 +48,7 @@ public class OrderService {
 	public Optional<List<OrderDTO>> getOrdersByCustomerName(String customerName) {
 		Optional<List<Order>> orderOptionals = orderRepository.findByCustomerNameContainingIgnoreCase(customerName);
 
-		List<Order> orders = orderOptionals.orElse(new ArrayList<Order>());
+		List<Order> orders = orderOptionals.orElse(null);
 		if (orders.isEmpty()) {
 			return Optional.empty();
 		}
@@ -90,7 +90,7 @@ public class OrderService {
 				OrderDetail detail = orderMapper.toOrderDetailEntity(detailDTO);
 				detail.setOrder(existingOrder);
 				return detail;
-			}).collect(Collectors.toList());
+			}).toList();
 
 			existingOrder.getOrderDetails().addAll(newOrderDetails);
 		}

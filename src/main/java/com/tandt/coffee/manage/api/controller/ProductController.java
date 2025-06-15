@@ -37,7 +37,7 @@ public class ProductController {
 		return ResponseEntity.ok(new ApiResponse<>(true, "Product created successfully", createProduct));
 	}
 	
-	@GetMapping("/id")
+	@GetMapping("/{id}")
 	public ResponseEntity<ApiResponse<ProductDTO>> getOrderByID(@PathVariable Long id){
 		log.info("Fetching product with id: {}",id);
 		ProductDTO productDTO = productService.getProductById(id).orElse(null);
