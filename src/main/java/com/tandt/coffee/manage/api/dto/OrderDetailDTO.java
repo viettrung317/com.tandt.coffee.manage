@@ -1,5 +1,6 @@
 package com.tandt.coffee.manage.api.dto;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import com.tandt.coffee.manage.api.model.Order;
@@ -18,6 +19,7 @@ public class OrderDetailDTO implements Serializable{
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = -3356044431911547543L;
 	private Long id;
 	private Long orderId;

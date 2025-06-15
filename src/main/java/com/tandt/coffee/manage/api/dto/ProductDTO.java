@@ -1,5 +1,6 @@
 package com.tandt.coffee.manage.api.dto;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import com.tandt.coffee.manage.api.model.Product;
@@ -15,6 +16,7 @@ public class ProductDTO implements Serializable {
     /**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = -8036517129285850849L;
 	private Long id;
     private String name;
