@@ -48,14 +48,14 @@ public class OrderService {
 	public Optional<List<OrderDTO>> getOrdersByCustomerName(String customerName) {
 		Optional<List<Order>> orderOptionals = orderRepository.findByCustomerNameContainingIgnoreCase(customerName);
 
-		List<Order> orders = orderOptionals.orElse(null);
+		List<Order> orders = orderOptionals.orElse(new ArrayList<Order>());
 		if (orders.isEmpty()) {
 			return Optional.empty();
 		}
 
 		List<OrderDTO> dtos = orders.stream().map(orderMapper::toDTO).collect(Collectors.toList());
 
-		return Optional.ofNullable(dtos);
+		return Optional.of(dtos);
 	}
 	
 	public Optional<OrderDTO> addOrder(OrderDTO orderDTO) {
