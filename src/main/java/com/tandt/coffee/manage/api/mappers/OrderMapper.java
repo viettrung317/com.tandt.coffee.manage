@@ -13,13 +13,13 @@ import com.tandt.coffee.manage.api.dto.OrderDetailDTO;
 import com.tandt.coffee.manage.api.model.Order;
 import com.tandt.coffee.manage.api.model.OrderDetail;
 
-@Mapper(componentModel ="Spring")
+@Mapper(componentModel = "spring")
 public interface OrderMapper {
-	@Mapping(target = "orderDetails", source = "orderDetails")
+	@Mapping(target = "orderDetailList", source = "orderDetails")
 	OrderDTO toDTO(Order order);
 	
 	@InheritInverseConfiguration(name = "toDTO")
-	@Mapping(target = "orderDetails", ignore = true)
+	@Mapping(target = "orderDetails", source = "orderDetailList")
 	Order toEntity(OrderDTO orderDTO);
 	
 	List<OrderDTO> toDTOList(List<Order> orders);
