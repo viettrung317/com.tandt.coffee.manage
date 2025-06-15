@@ -34,5 +34,5 @@ public class Product {
     private int stock;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private Set<Order> orderDetails;
+    private Set<OrderDetail> orderDetails;
 }

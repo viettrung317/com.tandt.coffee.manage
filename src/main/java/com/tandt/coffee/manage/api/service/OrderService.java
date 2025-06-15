@@ -26,10 +26,10 @@ import lombok.extern.slf4j.Slf4j;
 public class OrderService {
 
 	@Autowired
-	private final OrderRepository orderRepository;
+	OrderRepository orderRepository;
 
 	@Autowired
-	private final OrderMapper orderMapper;
+	OrderMapper orderMapper;
 
 	@Transactional(readOnly = true)
 	public Optional<List<OrderDTO>> getAllOrder() {

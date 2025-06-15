@@ -1,7 +1,5 @@
 package com.tandt.coffee.manage.api.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,14 +43,7 @@ public class ProductController {
 		ProductDTO productDTO = productService.getProductById(id).orElse(null);
 		return ResponseEntity.ok(new ApiResponse<>(true, "Product fetching successfully", productDTO));
 	}
-	
-	@GetMapping("/by-name/{name")
-	public ResponseEntity<ApiResponse<List<ProductDTO>>> getsByCustomerName(@PathVariable String customerName){
-		log.info("Fetching product with name: {}", customerName);
-		List<ProductDTO> productDTOs = productService.getProductsByCustomerName(customerName).orElse(null);
-		return ResponseEntity.ok(new ApiResponse<>(true, "Product retrieved", productDTOs));
-	}
-	
+
 	@PutMapping("/{id}")
 	public ResponseEntity<ApiResponse<ProductDTO>> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO){
 		ProductDTO newProductDTO = productService.updateProduct(id, productDTO).orElse(null);

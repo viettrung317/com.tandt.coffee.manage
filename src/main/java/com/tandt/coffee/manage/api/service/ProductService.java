@@ -1,9 +1,7 @@
 package com.tandt.coffee.manage.api.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,18 +39,6 @@ public class ProductService {
 	public Optional<ProductDTO> getProductById(Long id) {
 		ProductDTO productDTO = productMapper.toDTO(productRepository.findById(id).orElse(null));
 		return Optional.ofNullable(productDTO);
-	}
-
-	@Transactional(readOnly = true)
-	public Optional<List<ProductDTO>> getProductsByCustomerName(String customerName) {
-		Optional<List<Product>> products = productRepository.findByCustomerNameContainingIgnoreCase(customerName);
-
-		List<Product> listProducts = products.orElse(new ArrayList<Product>());
-		if (listProducts.isEmpty()) {
-			return Optional.empty();
-		}
-		List<ProductDTO> listProductDtos = listProducts.stream().map(productMapper::toDTO).collect(Collectors.toList());
-		return Optional.ofNullable(listProductDtos);
 	}
 
 	public Optional<ProductDTO> addProduct(ProductDTO productDTO) {

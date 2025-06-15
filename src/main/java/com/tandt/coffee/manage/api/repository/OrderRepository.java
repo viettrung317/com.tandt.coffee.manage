@@ -10,8 +10,6 @@ import com.tandt.coffee.manage.api.model.Order;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-	Optional<Order> findById(String id);
-
 	Optional<List<Order>> findByCustomerNameContainingIgnoreCase(String customerName);
 
 	OrderDTO save(OrderDTO orderDTO);
