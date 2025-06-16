@@ -8,4 +8,6 @@ import com.tandt.coffee.manage.api.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
+
+    Optional<User>  findByName(String name);
 }
