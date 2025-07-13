@@ -1,5 +1,8 @@
 package com.tandt.coffee.manage.api.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,24 +39,37 @@ public class ProductController {
 		ProductDTO createProduct = productService.addProduct(productDTO).orElse(null);
 		return ResponseEntity.ok(new ApiResponse<>(true, "Product created successfully", createProduct));
 	}
+
+	@GetMapping
+	public ResponseEntity<ApiResponse<List<ProductDTO>>> getAllProduct() {
+		List<ProductDTO> listProductDTOs = productService.getAllProduct().orElse(null);
+		return ResponseEntity.ok(new ApiResponse<>(true, "Product retrieved", listProductDTOs));
+	}
 	
+	@GetMapping("/by-name/{name}")
+	public ResponseEntity<ApiResponse<List<ProductDTO>>> getProductByName(@PathVariable String namm){
+		List<ProductDTO> listProductDTOs = productService.findProductByName(namm).orElse(new ArrayList<ProductDTO>());
+		return ResponseEntity.ok(new ApiResponse<>(true, "Product retrieved", listProductDTOs));
+	}
+
 	@GetMapping("/{id}")
-	public ResponseEntity<ApiResponse<ProductDTO>> getOrderByID(@PathVariable Long id){
-		log.info("Fetching product with id: {}",id);
+	public ResponseEntity<ApiResponse<ProductDTO>> getProductByID(@PathVariable Long id) {
+		log.info("Fetching product with id: {}", id);
 		ProductDTO productDTO = productService.getProductById(id).orElse(null);
 		return ResponseEntity.ok(new ApiResponse<>(true, "Product fetching successfully", productDTO));
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ApiResponse<ProductDTO>> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO){
+	public ResponseEntity<ApiResponse<ProductDTO>> updateProduct(@PathVariable Long id,
+			@RequestBody ProductDTO productDTO) {
 		ProductDTO newProductDTO = productService.updateProduct(id, productDTO).orElse(null);
 		return ResponseEntity.ok(new ApiResponse<>(true, "Product updated successfully", newProductDTO));
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ApiResponse<Void>> deleteProduct(@PathVariable Long id){
+	public ResponseEntity<ApiResponse<Void>> deleteProduct(@PathVariable Long id) {
 		productService.deleteProduct(id);
 		return ResponseEntity.ok(new ApiResponse<>(true, "Product delete successfully", null));
 	}
-	
+
 }

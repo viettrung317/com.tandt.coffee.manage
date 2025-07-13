@@ -29,7 +29,7 @@ public class ProductService {
 	ProductMapper productMapper;
 
 	@Transactional(readOnly = true)
-	public Optional<List<ProductDTO>> getAllOrder() {
+	public Optional<List<ProductDTO>> getAllProduct() {
 		log.info("Fetching all products");
 		List<ProductDTO> listProductDTOs = productMapper.toListProductDTO(productRepository.findAll());
 		return Optional.ofNullable(listProductDTOs);
@@ -39,6 +39,12 @@ public class ProductService {
 	public Optional<ProductDTO> getProductById(Long id) {
 		ProductDTO productDTO = productMapper.toDTO(productRepository.findById(id).orElse(null));
 		return Optional.ofNullable(productDTO);
+	}
+	
+	@Transactional(readOnly = true)
+	public Optional<List<ProductDTO>> findProductByName(String name){
+		List<ProductDTO> listProducts = productMapper.toListProductDTO(productRepository.findByName(name));
+		return Optional.ofNullable(listProducts);
 	}
 
 	public Optional<ProductDTO> addProduct(ProductDTO productDTO) {
